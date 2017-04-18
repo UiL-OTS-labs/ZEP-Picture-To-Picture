@@ -1,0 +1,89 @@
+NormalWindow help_window
+{
+}
+
+
+Page help_dialog
+{
+    on_event:close()
+    {
+        done();
+    }
+
+
+    on_event:key_press()
+    {
+        if (input_key == KEY_Escape || input_key == KEY_Return) 
+            done();
+    }
+
+
+    VerticalLayout layout
+    {
+        init()
+        {
+            left_margin = 40;
+            right_margin = 40;
+            top_margin = 40;
+            bottom_margin = 40;
+            spacing = 20;
+            options = 
+                LAYOUT_STRETCH_ITEMS | 
+                LAYOUT_ATTACH_LEFT | 
+                LAYOUT_ATTACH_RIGHT;
+            fill_pattern_color = INFO_PAGE_COLOR;
+        }
+
+
+        LabelGadget message
+        {
+            init()
+            {
+                font_family = INFO_PAGE_MESSAGE_FONT_FAMILY;
+                font_size = INFO_PAGE_MESSAGE_FONT_SIZE;
+                fill_pattern_color = INFO_PAGE_MESSAGE_COLOR;
+                text_color = INFO_PAGE_MESSAGE_TEXT_COLOR;
+                is_wrapping = true;
+                hor_alignment = ALIGN_BEGIN;
+                ver_alignment = ALIGN_BEGIN;
+                margin = 10;
+                border = 2;
+                border_style = BORDER_RIDGE;
+            }
+        }
+    }
+
+
+    void done()
+    {
+        help_window.hide();
+    }
+
+
+    //======================================================================
+
+
+    void action(string txt, bool fs)
+    {
+        layout.message.text = txt, true;
+
+        help_window.title = "Help";
+        help_window.head = test_window1.head;
+        help_window.size = 60;  // % of screen
+        help_window.position = ALIGN_CENTER, ALIGN_CENTER;
+        if (fs)
+        {
+//          help_window.is_maximized = true;
+            help_window.is_fullscreen = true;
+        }
+        help_window.show_page(this);
+        help_window.show();
+        help_window.activate();
+    }
+}
+
+
+void show_help(string txt, bool fs=false)
+{
+    help_dialog.action(txt, fs);
+}

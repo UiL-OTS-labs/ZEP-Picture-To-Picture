@@ -1,0 +1,57 @@
+/******************************************************************************\
+FILE:           stimuli.zm
+AUTHOR:         Theo Veenker <theo.veenker@beexy.nl>
+ADAPTED BY:     -
+
+DESCRIPTION:
+
+Defines the formats of item table(s) and provides the actual content of
+the item table(s) i.e. stimulus information.
+
+
+HISTORY:
+2011-10-25 TV   Created.
+
+\******************************************************************************/
+
+
+// Symbolic definition of item type.
+enum ItemType
+{
+    NON_WORD,                   // non-word
+    REAL_WORD,                  // real word
+}
+
+
+// Item table record.
+record TestItem
+{
+    int         id;             // item id
+    ItemType    type;           // item type
+    string      word;           // stimulus word
+}
+
+
+// Practice item table.
+//   index: item number
+TestItem[..] prac_items =
+{
+    {1,         NON_WORD,       "palve"},
+    {2,         REAL_WORD,      "hot"},
+};
+
+
+// Test item table.
+//   index: item number
+TestItem[..] test_items =
+{
+    {1,         NON_WORD,       "slirque"},
+    {2,         NON_WORD,       "crawse"},
+    {3,         NON_WORD,       "thwurp"},
+    {4,         NON_WORD,       "clem"},
+
+    {5,         REAL_WORD,      "white"},
+    {6,         REAL_WORD,      "travel"},
+    {7,         REAL_WORD,      "letter"},
+    {8,         REAL_WORD,      "clown"},
+};
