@@ -15,20 +15,13 @@ HISTORY:
 \******************************************************************************/
 
 
-// Symbolic definition of item type.
-enum ItemType
-{
-    NON_WORD,                   // non-word
-    REAL_WORD,                  // real word
-}
-
-
 // Item table record.
 record TestItem
 {
-    int         id;             // item id
-    ItemType    type;           // item type
-    string      word;           // stimulus word
+    int         id; // item id
+    string      target_image_filename; // stimulus word
+    string      answer1_image_filename; // stimulus word
+    string      answer2_image_filename; // stimulus word
 }
 
 
@@ -36,8 +29,8 @@ record TestItem
 //   index: item number
 TestItem[..] prac_items =
 {
-    {1,         NON_WORD,       "palve"},
-    {2,         REAL_WORD,      "hot"},
+    {1, "1.png", "1.png", "1.png"},
+    {1, "1.png", "1.png", "1.png"},
 };
 
 
@@ -45,13 +38,6 @@ TestItem[..] prac_items =
 //   index: item number
 TestItem[..] test_items =
 {
-    {1,         NON_WORD,       "slirque"},
-    {2,         NON_WORD,       "crawse"},
-    {3,         NON_WORD,       "thwurp"},
-    {4,         NON_WORD,       "clem"},
-
-    {5,         REAL_WORD,      "white"},
-    {6,         REAL_WORD,      "travel"},
-    {7,         REAL_WORD,      "letter"},
-    {8,         REAL_WORD,      "clown"},
+    {1, "1.png", "1.png", "1.png"},
+    {1, "1.png", "1.png", "1.png"},
 };

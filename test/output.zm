@@ -1,7 +1,7 @@
 /******************************************************************************\
 FILE:           output.zm
 AUTHOR:         Theo Veenker <theo.veenker@beexy.nl>
-ADAPTED BY:     -
+ADAPTED BY:     Chris van Run
 
 DESCRIPTION:
 
@@ -20,12 +20,12 @@ record TestOutput
     int         trialnum;       // trial number
 
     int         id;             // item id
-    ItemType    type;           // item type
-    string      word;           // stimulus word
+    string      stimuli_target_image_filename;
+    string      stimuli_answer1_image_filename;
+    string      stimuli_answer2_image_filename;
 
-    int         value;          // response value: 0=no, 1=yes, -1=timeout
+    string      answer_image_filename;
     int         rt;             // response time [ms]
-    int         correct;        // correct response: 0=no, 1=yes, -1=n.a.
 }
 
 

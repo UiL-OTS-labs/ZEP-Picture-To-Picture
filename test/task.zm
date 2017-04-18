@@ -76,8 +76,8 @@ Block task
                 "\n"
                 "First we will do a short practice.\n"
                 "\n"
-//                "<i>Hit Enter when ready to start.</i>", 
-                "<i>Hit any button on the button-box when ready to start.</i>", 
+//                "<i>Hit Enter when ready to start.</i>",
+                "<i>Hit any button on the button-box when ready to start.</i>",
                 true);
 
             pause_page.action(this);
@@ -96,7 +96,7 @@ Block task
             num_cycles = prac_items.size;
 
             // Prepare test page: progress bar, feedback and prompt enabled.
-            test_page.setup(num_cycles, true, true);
+            test_page.setup(num_cycles, false, false);
         }
 
 
@@ -104,7 +104,6 @@ Block task
         {
             test_page.cleanup();
         }
-
 
         Trial trial
         {
@@ -137,9 +136,9 @@ Block task
                 "If you have any questions at this moment please ask the "
                 "experimenter now.\n"
                 "\n"
-//                "<i>Hit Enter when ready to proceed.</i>", 
+//                "<i>Hit Enter when ready to proceed.</i>",
                 "<i>Hit any button on the button-box when ready to "
-                "proceed.</i>", 
+                "proceed.</i>",
                 true);
 
             pause_page.action(this);
@@ -161,7 +160,7 @@ Block task
             num_cycles = test_items.size;
 //            num_cycles = 3;
 
-            // Prepare test page: progress bar enabled, feedback and prompt 
+            // Prepare test page: progress bar enabled, feedback and prompt
             // disabled.
             test_page.setup(num_cycles, false, false);
         }
@@ -192,11 +191,12 @@ Block task
                 TestOutput output;
                 output.trialnum = test.cycle + 1;
                 output.id = item.id;
-                output.type = item.type;
-                output.word = item.word;
-                output.value = test_page.response.value;
+                output.stimuli_target_image_filename = item.target_image_filename;
+                output.stimuli_answer1_image_filename = item.answer1_image_filename;
+                output.stimuli_answer2_image_filename = item.answer2_image_filename;
+
+                output.answer_image_filename = "PLACEHOLDER";
                 output.rt = test_page.response.rt;
-                output.correct = test_page.response.correct;
                 test_output_append(output);
             }
         }

@@ -1,0 +1,4 @@
+### test: test results ###
+trialnum;id;stimuli_target_image_filename;stimuli_answer1_image_filename;stimuli_answer2_image_filename;answer_image_filename;rt
+1;1;1.png;1.png;1.png;PLACEHOLDER;295
+2;1;1.png;1.png;1.png;PLACEHOLDER;493

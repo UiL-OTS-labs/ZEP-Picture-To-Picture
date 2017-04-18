@@ -59,7 +59,7 @@ Page test_page
             init()
             {
                 fill_pattern_color = TEST_PAGE_STIMULUS_COLOR;
-                size = 450, 100;
+                size = 450, 450;
                 offset_x = width / 2;
                 offset_y = height / 2;
             }
@@ -75,16 +75,21 @@ Page test_page
                 }
             }
 
-
-            TextShape stimulus
+            ImageShape stimulus
             {
-                init()
+                void load(string fn, int w=0)
                 {
-                    font_family = TEST_PAGE_STIMULUS_FONT_FAMILY;
-                    font_size = TEST_PAGE_STIMULUS_FONT_SIZE;
-                    line_pattern_color = TEST_PAGE_STIMULUS_TEXT_COLOR;
-                    hor_alignment = ALIGN_CENTER;
-                    ver_alignment = ALIGN_CENTER;
+                    image = fn;
+                    if (w > 0) {
+                        width = w;
+                        height = -1;
+                    }
+                    else {
+                        width = 0;
+                        height = 0;
+                    }
+                    x = -actual_width / 2;
+                    y = -actual_height / 2;
                 }
             }
         }
@@ -103,14 +108,8 @@ Page test_page
             {
                 init()
                 {
-                    text = NO_BUTTON_TEXT;
-                    font_family = TEST_PAGE_BUTTON_FONT_FAMILY;
-                    font_size = TEST_PAGE_BUTTON_FONT_SIZE;
-                    fill_pattern_color = TEST_PAGE_BUTTON_COLOR;
-                    text_color = TEST_PAGE_BUTTON_TEXT_COLOR;
-                    size = 150, 75;
+                    size = 450, 450;
                 }
-
 
                 on_event:activate()
                 {
@@ -123,14 +122,8 @@ Page test_page
             {
                 init()
                 {
-                    text = YES_BUTTON_TEXT;
-                    font_family = TEST_PAGE_BUTTON_FONT_FAMILY;
-                    font_size = TEST_PAGE_BUTTON_FONT_SIZE;
-                    fill_pattern_color = TEST_PAGE_BUTTON_COLOR;
-                    text_color = TEST_PAGE_BUTTON_TEXT_COLOR;
-                    size = 150, 75;
+                    size = 450, 450;
                 }
-
 
                 on_event:activate()
                 {
@@ -143,14 +136,17 @@ Page test_page
         time start_stimulus(time t)
         {
             // Prepare stimulus presentation object.
-            canvas.stimulus.text = item.word;
+            canvas.stimulus.load(stimuli_dir() + "images/" + item.target_image_filename);
+
+            buttons.button1.fill_pattern_image = stimuli_dir() + "images/" + item.answer1_image_filename;
+            buttons.button2.fill_pattern_image = stimuli_dir() + "images/" + item.answer2_image_filename;
 
             // Start fixation cross.
             canvas.fixation.start(t, FIXATION_DURATION);
             time fixoffset = canvas.fixation.expected_finish_time;
 
             // Start stimulus at fixation offset.
-            canvas.stimulus.start(fixoffset, STIMULUS_DURATION);
+            canvas.stimulus.start(fixoffset);
 
             // Return stimulus onset time.
             return canvas.stimulus.expected_start_time;
@@ -169,16 +165,13 @@ Page test_page
     Response response
     {
         // Response data.
-        int     value;          // response value: 0=no, 1=yes, -1=timeout
+        int     value;          // response value: 0=answer1, 1=answer2, -1=timeout
         int     rt;             // response time [ms]
-        int     correct;        // correct response: 0=no, 1=yes, -1=n.a.
-
 
         void clear()
         {
             value = -1;
             rt = -9999;
-            correct = -1;
         }
 
 
@@ -186,15 +179,12 @@ Page test_page
         {
             HitType validity = hit(t);
 
-            // Accept the first hit in the response interval and end the 
+            // Accept the first hit in the response interval and end the
             // response interval.
             if (validity == HIT_VALID)
             {
                 value = val;
                 rt = int(reaction_time(0));
-                correct = 
-                    (item.type != NON_WORD && val == 1) ||
-                    (item.type == NON_WORD && val == 0);
 
                 ignore_remaining_hits();
 
@@ -209,11 +199,6 @@ Page test_page
 
         on_event:finish()
         {
-            real correctness = 0;
-            if (num_valid_hits > 0) correctness = correct ? 1 : -1;
-
-            if (!test_page_overlay.start_feedback(this, correctness, 
-                    FEEDBACK_DURATION)) 
                 done(CONTINUE);
         }
 
@@ -248,7 +233,7 @@ Page test_page
         test_page_overlay.setup(this);
 
         // Show or hide prompt.
-        test_page_overlay.show_prompt(pr ? 
+        test_page_overlay.show_prompt(pr ?
             "is it a real word?" : "");
 
         // Enable or disable the progress bar.
@@ -295,7 +280,7 @@ Page test_page
         time stimonset = layout.start_stimulus(tref);
 
 
-        // Response interval starts at stimulus onset. Timeout after 
+        // Response interval starts at stimulus onset. Timeout after
         // RESPONSE_DURATION unless this duration is 0s or less.
         response.start(stimonset, RESPONSE_DURATION);
 
@@ -306,9 +291,8 @@ Page test_page
 
         // Update status line on control window. Cleared in done() above.
         control.set_status(
-            string(item.id) + "  " + 
-            string(item.type) + "  " + 
-            string(item.word));
+            string(item.id) + "\t" +
+            item.target_image_filename);
 
 
         // Remember who to signal when the trial is over.
