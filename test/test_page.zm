@@ -50,7 +50,6 @@ Page test_page
     {
         init()
         {
-            spacing = 50;
             height = 0;     // 0 means as large as possible
         }
 
@@ -60,11 +59,16 @@ Page test_page
             init()
             {
                 fill_pattern_color = TEST_PAGE_COLOR;
-                size = 450, 450;
+                scaling_x = SCALING_FACTOR_FOR_IMAGES;
+                scaling_y = scaling_x;
+            }
+
+            on_event:resize()
+            {
+                size = test_window1.height/2, test_window1.height/2;
                 offset_x = width / 2;
                 offset_y = height / 2;
             }
-
 
             CrossShape fixation
             {
@@ -100,16 +104,35 @@ Page test_page
         {
             init()
             {
-                spacing = 50;
-                options = LAYOUT_EQUAL_WIDTH;
+                spacing = 100;
+                is_visible = false;
             }
 
+            on_event:pre_update()
+            {
+                resize();
+            }
+
+            void resize()
+            {
+                button1.resize();
+                button2.resize();
+            }
 
             ButtonGadget button1
             {
                 init()
                 {
-                    size = 450, 450;
+                    fill_pattern_scaling_x = SCALING_FACTOR_FOR_IMAGES;
+                    fill_pattern_scaling_y = fill_pattern_scaling_x;
+                }
+
+                void resize()
+                {
+                    size = test_window1.height/2, test_window1.height/2;
+
+                    fill_pattern_offset_x = (width / 2) - (image_width(fill_pattern_image)*fill_pattern_scaling_x/2);
+                    fill_pattern_offset_y = (height / 2) - (image_height(fill_pattern_image)*fill_pattern_scaling_y/2);
                 }
 
                 on_event:activate()
@@ -118,12 +141,20 @@ Page test_page
                 }
             }
 
-
             ButtonGadget button2
             {
                 init()
                 {
-                    size = 450, 450;
+                    fill_pattern_scaling_x = SCALING_FACTOR_FOR_IMAGES;
+                    fill_pattern_scaling_y = fill_pattern_scaling_x;
+                }
+
+                void resize()
+                {
+                    size = test_window1.height/2, test_window1.height/2;
+
+                    fill_pattern_offset_x = (width / 2) - (image_width(fill_pattern_image)*fill_pattern_scaling_x/2);
+                    fill_pattern_offset_y = (height / 2) - (image_height(fill_pattern_image)*fill_pattern_scaling_y/2);
                 }
 
                 on_event:activate()
@@ -148,6 +179,7 @@ Page test_page
 
             // Start stimulus at fixation offset.
             canvas.stimulus.start(fixoffset);
+            buttons.start(fixoffset);
 
             // Return stimulus onset time.
             return canvas.stimulus.expected_start_time;
@@ -158,6 +190,7 @@ Page test_page
             full_abort();
 
             canvas.stimulus.is_visible = false;
+            buttons.is_visible = false;
         }
     }
 

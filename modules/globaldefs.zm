@@ -43,6 +43,12 @@ const bool      GROUP_RECORD_UPDATEABLE         = false;
 // selected group.
 const bool      SHOW_ASSIGNED_GROUP             = true;
 
+// Controls the scaling factor for images
+// 1.0 same size as picture size
+// 0.5 half of the size of original picture
+// 2.0 twice the size of the original picture
+const real SCALING_FACTOR_FOR_IMAGES = 1.0;
+
 string[..] BEEXY_BOX_PORT_ADDRESS_CANDIDATES = {
     "/dev/ttyACM0",
     "/dev/ttyACM1",
