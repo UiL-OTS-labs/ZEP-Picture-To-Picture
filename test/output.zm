@@ -23,8 +23,9 @@ record TestOutput
     string      stimuli_target_image_filename;
     string      stimuli_answer1_image_filename;
     string      stimuli_answer2_image_filename;
-
+    string      stimuli_expected_answer_image_filename;
     string      answer_image_filename;
+    int         correct;
     int         rt;             // response time [ms]
 }
 

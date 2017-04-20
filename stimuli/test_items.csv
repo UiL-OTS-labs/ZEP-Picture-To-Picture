@@ -1,5 +1,5 @@
 #### Test Items ####
-id;target_image_filename;answer1_image_filename;answer2_image_filename
-1;"triangles.svg";"pizza.png";"muffin.png"
-2;"pizza.png";"triangles.svg";"muffin.png"
-3;"muffin.png";"pizza.png";"triangles.svg"
+id;target_image_filename;answer1_image_filename;answer2_image_filename;expected_answer_image_filename
+1;"triangles.svg";"pizza.png";"muffin.png";"muffin.png"
+2;"pizza.png";"triangles.svg";"muffin.png";"muffin.png"
+3;"muffin.png";"pizza.png";"triangles.svg";"triangles.svg"

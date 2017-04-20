@@ -1,3 +1,3 @@
 ### Practice Items ####
-id;target_image_filename;answer1_image_filename;answer2_image_filename
-1;"triangles.svg";"pizza.png";"muffin.png"
+id;target_image_filename;answer1_image_filename;answer2_image_filename;expected_answer_image_filename
+1;"triangles.svg";"pizza.png";"muffin.png";"muffin.png"

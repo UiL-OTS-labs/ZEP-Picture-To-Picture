@@ -222,14 +222,15 @@ Block task
             {
                 // Add new row to test output table.
                 TestOutput output;
-                output.trialnum = test.cycle + 1;
-                output.id = item.id;
-                output.stimuli_target_image_filename = item.target_image_filename;
-                output.stimuli_answer1_image_filename = item.answer1_image_filename;
-                output.stimuli_answer2_image_filename = item.answer2_image_filename;
-
-                output.answer_image_filename = test_page.response.value;
-                output.rt = test_page.response.rt;
+                output.trialnum                               = test.cycle + 1;
+                output.id                                     = item.id;
+                output.stimuli_target_image_filename          = item.target_image_filename;
+                output.stimuli_answer1_image_filename         = item.answer1_image_filename;
+                output.stimuli_answer2_image_filename         = item.answer2_image_filename;
+                output.stimuli_expected_answer_image_filename = item.expected_answer_image_filename;
+                output.correct                                = test_page.response.correct;
+                output.answer_image_filename                  = test_page.response.value;
+                output.rt                                     = test_page.response.rt;
                 test_output_append(output);
             }
         }

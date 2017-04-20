@@ -201,11 +201,12 @@ Page test_page
         // Response data.
         string     value;          // response value: 0=answer1, 1=answer2, -1=timeout
         int     rt;             // response time [ms]
-
+        int correct; // correct, 0 is incorrect, 1 is correct, -9999 is missing
         void clear()
         {
             value = "none";
             rt = -9999;
+            correct = -9999;
         }
 
 
@@ -217,10 +218,15 @@ Page test_page
             // response interval.
             if (validity == HIT_VALID)
             {
-                if ( val == 1)
+                if ( val == 0)
                     value = item.answer1_image_filename;
-                else if ( val == 2)
+                else if ( val == 1)
                     value = item.answer2_image_filename;
+
+                if( value == item.expected_answer_image_filename )
+                    correct = 1;
+                else
+                    correct = 0;
 
                 rt = int(reaction_time(0));
 
@@ -237,7 +243,12 @@ Page test_page
 
         on_event:finish()
         {
-                done(CONTINUE);
+            real correctness = 0;
+           if (num_valid_hits > 0) correctness = correct ? 1 : -1;
+
+           if (!test_page_overlay.start_feedback(this, correctness,
+                   FEEDBACK_DURATION))
+               done(CONTINUE);
         }
 
 
