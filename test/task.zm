@@ -28,6 +28,7 @@ HISTORY:
 \******************************************************************************/
 
 //requires 1.14;
+plugin zep_file;
 
 import defs;
 import stimuli;
@@ -40,7 +41,10 @@ Block task
 {
     on_event:entry()
     {
-        open_button_box();
+        if(open_button_box() != OK)
+        {
+            println("Could not open button box!");
+        }
     }
 
     int open_button_box()
@@ -49,11 +53,14 @@ Block task
         while(index < BEEXY_BOX_PORT_ADDRESS_CANDIDATES.size)
         {
             string address = BEEXY_BOX_PORT_ADDRESS_CANDIDATES[index];
-            control.button_box.open(address);
-            if(control.button_box.is_open)
+            if(file_exists(address))
             {
-                println("Managed to open button box on " + address);
-                return OK;
+                control.button_box.open(address);
+                if(control.button_box.is_open)
+                {
+                    println("Managed to open button box on " + address);
+                    return OK;
+                }
             }
             index = index + 1;
         }
