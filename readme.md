@@ -13,9 +13,11 @@ appealing features, and some instruction.
 * Download and unpack this repository
 * Run either `windows-terminal.bat` or `linux-terminal.sh` to start up a _command-line interface_ within the unpacked repository
 * You can then start up the experiment by typing: `zep pictopic.zp` or `zep-1.14 pictopic.zp`
-*
+
 ## Adding stimuli
 Please add your own stimuli by populating the `stimuli/images` directory with your own images (svg or png) and update `stimuli/test_items.csv` and `stimuli/prac_items.csv`.
+
+You might want to change `SCALING_FACTOR_FOR_IMAGES` in `modules/globaldefs.zm` if your largest image is bigger than 1/2 of the screen height.
 
 ## Changing settings
 In `test/defs.zm` you can change switches for feedback, switches for prompts, and prompts. In this file you can also set small timing tweaks inter-stimulus interval.
@@ -40,7 +42,7 @@ Supervisors:
 Test trials are completely random (no pseudo-randomisation).
 
 ## Acknowledgements
-* Efi Giannopoulou​ for the prompt to create this.
+* Efi Giannopoulou​ prompting the creation of this Boilerplate experiment.
 
 ## About Zep
 Zep is a system for implementing and running (psycholinguistic) experiments. Zep delivers auditory, visual and cross modal stimuli, and provides interfacing with external hardware such as eye-trackers and button boxes. It is based on a multipurpose programming language (also called Zep) which enables you to implement not only experiments but other applications as well.
