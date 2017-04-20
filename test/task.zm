@@ -24,6 +24,7 @@ Global structure of this experiment phase:
 
 HISTORY:
 2011-10-25 TV   Created.
+2017-04-20 CvR   Adjusted.
 
 \******************************************************************************/
 
@@ -179,7 +180,6 @@ Block task
             if (shuffle_test_items() != OK) terminate;
 
             num_cycles = test_items.size;
-//            num_cycles = 3;
 
             // Prepare test page: progress bar enabled, feedback and prompt
             // disabled.
