@@ -30,8 +30,7 @@ record TestItem
 //   index: item number
 TestItem[..] prac_items =
 {
-    {1, "1.svg", "1.svg", "1.svg"},
-    {1, "1.svg", "1.svg", "1.svg"},
+    {1, "triangles.svg", "pizza.png", "muffin.png"},
 };
 
 
@@ -39,6 +38,7 @@ TestItem[..] prac_items =
 //   index: item number
 TestItem[..] test_items =
 {
-    {1, "1.svg", "1.svg", "1.svg"},
-    {1, "1.svg", "1.svg", "1.svg"},
+    {1, "triangles.svg", "pizza.png", "muffin.png"},
+    {2, "pizza.png", "muffin.png", "triangles.svg"},
+    {3, "muffin.png", "triangles.svg", "pizza.png"},
 };
