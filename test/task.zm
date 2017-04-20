@@ -46,6 +46,18 @@ Block task
         {
             println("Could not open button box!");
         }
+
+        if(load_stimuli(prac_items, "prac_items.csv") != OK)
+        {
+            println("Something went wrong while loading the test items!");
+            terminate;
+        }
+
+        if(load_stimuli(test_items, "test_items.csv") != OK)
+        {
+            println("Something went wrong while loading the test items!");
+            terminate;
+        }
     }
 
     int open_button_box()

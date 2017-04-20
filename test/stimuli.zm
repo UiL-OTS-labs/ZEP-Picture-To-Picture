@@ -25,13 +25,23 @@ record TestItem
     string      answer2_image_filename; // stimulus word
 }
 
+// Loads item table(s) from CSV file(s) in the stimuli folder.
+int load_stimuli(TestItem[] target, string filename)
+{
+    int err;
+
+	// Load data into test_prac_items table.
+    err =  target.load(stimuli_dir() + filename,
+        true,           // if true, file contains a header row
+        1);             // number of lines to skip before header and data
+    if (err) return err;
+
+    return OK;
+}
 
 // Practice item table.
 //   index: item number
-TestItem[..] prac_items =
-{
-    {1, "triangles.svg", "pizza.png", "muffin.png"},
-};
+TestItem[..] prac_items;
 
 
 // Test item table.
