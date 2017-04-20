@@ -152,7 +152,6 @@ Page test_page
             return canvas.stimulus.expected_start_time;
         }
 
-
         void reset()
         {
             full_abort();
@@ -165,12 +164,12 @@ Page test_page
     Response response
     {
         // Response data.
-        int     value;          // response value: 0=answer1, 1=answer2, -1=timeout
+        string     value;          // response value: 0=answer1, 1=answer2, -1=timeout
         int     rt;             // response time [ms]
 
         void clear()
         {
-            value = -1;
+            value = "none";
             rt = -9999;
         }
 
@@ -183,7 +182,11 @@ Page test_page
             // response interval.
             if (validity == HIT_VALID)
             {
-                value = val;
+                if ( val == 1)
+                    value = item.answer1_image_filename;
+                else if ( val == 2)
+                    value = item.answer2_image_filename;
+
                 rt = int(reaction_time(0));
 
                 ignore_remaining_hits();

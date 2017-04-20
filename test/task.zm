@@ -216,7 +216,7 @@ Block task
                 output.stimuli_answer1_image_filename = item.answer1_image_filename;
                 output.stimuli_answer2_image_filename = item.answer2_image_filename;
 
-                output.answer_image_filename = "PLACEHOLDER";
+                output.answer_image_filename = test_page.response.value;
                 output.rt = test_page.response.rt;
                 test_output_append(output);
             }
