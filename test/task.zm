@@ -40,12 +40,26 @@ Block task
 {
     on_event:entry()
     {
-        control.button_box.open();
-
-        // If necessary set parallel port line D0 to power button box device.
-//        control.button_box.output(0x02);
+        open_button_box();
     }
 
+    int open_button_box()
+    {
+        int index = 0;
+        while(index < BEEXY_BOX_PORT_ADDRESS_CANDIDATES.size)
+        {
+            string address = BEEXY_BOX_PORT_ADDRESS_CANDIDATES[index];
+            control.button_box.open(address);
+            if(control.button_box.is_open)
+            {
+                println("Managed to open button box on " + address);
+                return OK;
+            }
+            index = index + 1;
+        }
+
+        return ERROR;
+    }
 
     Part instructions
     {
