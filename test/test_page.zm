@@ -48,11 +48,12 @@ Page test_page
 
     VerticalLayout layout
     {
+        int default_length = 50;
+
         init()
         {
             height = 0;     // 0 means as large as possible
         }
-
 
         CanvasGadget canvas
         {
@@ -65,7 +66,8 @@ Page test_page
 
             on_event:resize()
             {
-                size = test_window1.height/2, test_window1.height/2;
+                layout.default_length = test_window1.height/2-50; // minus 50 because of progression bar overlay
+                size = layout.default_length, layout.default_length;
                 offset_x = width / 2;
                 offset_y = height / 2;
             }
@@ -129,8 +131,7 @@ Page test_page
 
                 void resize()
                 {
-                    size = test_window1.height/2, test_window1.height/2;
-
+                    size = layout.default_length, layout.default_length;
                     fill_pattern_offset_x = (width / 2) - (image_width(fill_pattern_image)*fill_pattern_scaling_x/2);
                     fill_pattern_offset_y = (height / 2) - (image_height(fill_pattern_image)*fill_pattern_scaling_y/2);
                 }
@@ -151,7 +152,7 @@ Page test_page
 
                 void resize()
                 {
-                    size = test_window1.height/2, test_window1.height/2;
+                    size = layout.default_length, layout.default_length;
 
                     fill_pattern_offset_x = (width / 2) - (image_width(fill_pattern_image)*fill_pattern_scaling_x/2);
                     fill_pattern_offset_y = (height / 2) - (image_height(fill_pattern_image)*fill_pattern_scaling_y/2);
