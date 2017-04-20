@@ -283,7 +283,7 @@ Page test_page
 
         // Show or hide prompt.
         test_page_overlay.show_prompt(pr ?
-            "is it a real word?" : "");
+            OVERLAY_PROMPT : "");
 
         // Enable or disable the progress bar.
         test_page_overlay.show_progress_bar(ntrials);   // disabled if < 0

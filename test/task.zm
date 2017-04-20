@@ -36,7 +36,7 @@ import stimuli;
 import shuffle;
 import output;
 import test_page;
-
+import test_page_overlay;
 
 Block task
 {
@@ -130,7 +130,7 @@ Block task
             num_cycles = prac_items.size;
 
             // Prepare test page: progress bar, feedback and prompt enabled.
-            test_page.setup(num_cycles, false, false);
+            test_page.setup(num_cycles, SHOW_PRACTICE_FEEDBACK, SHOW_PRACTICE_PROMPT);
         }
 
 
@@ -195,7 +195,7 @@ Block task
 
             // Prepare test page: progress bar enabled, feedback and prompt
             // disabled.
-            test_page.setup(num_cycles, false, false);
+            test_page.setup(num_cycles, SHOW_TEST_FEEDBACK, SHOW_TEST_PROMPT);
         }
 
 

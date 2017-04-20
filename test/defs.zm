@@ -27,6 +27,13 @@ const dur       STIMULUS_DURATION               = 1000ms;
 // Duration of the feedback presentation.
 const dur       FEEDBACK_DURATION               = 1000ms;
 
+// Switches below control the feedback (correctness) and overlay propt (see OVERLAY_PROMPT)
+const bool SHOW_PRACTICE_FEEDBACK = true;
+const bool SHOW_PRACTICE_PROMPT   = true;
+const bool SHOW_TEST_FEEDBACK     = false;
+const bool SHOW_TEST_PROMPT       = false;
+const string OVERLAY_PROMPT       = "Which picture fits best?";
+
 // Duration of the response interval. A value of 0ms means there is no
 // timeout.
 //const dur       RESPONSE_DURATION               = 2000ms;       // auto-paced
