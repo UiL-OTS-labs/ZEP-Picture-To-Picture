@@ -1,14 +1,13 @@
 /******************************************************************************\
-FILE:           vislexdec.zp
+FILE:           pictopic.zp
 AUTHOR:         Theo Veenker <theo.veenker@beexy.nl>
 ADAPTED BY:     -
 
 DESCRIPTION:
 
-Implementation of task: Visual Lexical Decision
+Implementation of task: Picture to picture match
 
-For more information on the vislexdec task see readme.txt in the 
-test folder.
+For more information on the Picture to picture match task see readme.md file
 
 
 Global structure of experiment:
