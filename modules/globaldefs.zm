@@ -48,20 +48,3 @@ const bool      SHOW_ASSIGNED_GROUP             = true;
 // 0.5 half of the size of original picture
 // 2.0 twice the size of the original picture
 const real SCALING_FACTOR_FOR_IMAGES = 1.0;
-
-string[..] BEEXY_BOX_PORT_ADDRESS_CANDIDATES = {
-    "/dev/ttyACM0",
-    "/dev/ttyACM1",
-    "COM",
-    "COM1",
-    "COM2",
-    "COM3",
-    "COM4",
-    "COM5",
-    "COM6",
-    "COM7",
-    "COM8",
-    "COM9",
-    "COM10",
-    "COM11",
-};

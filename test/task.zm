@@ -42,10 +42,7 @@ Block task
 {
     on_event:entry()
     {
-        if(open_button_box() != OK)
-        {
-            println("Could not open button box!");
-        }
+        control.button_box.open();
 
         if(load_stimuli(prac_items, "prac_items.csv") != OK)
         {
@@ -58,27 +55,6 @@ Block task
             println("Something went wrong while loading the test items!");
             terminate;
         }
-    }
-
-    int open_button_box()
-    {
-        int index = 0;
-        while(index < BEEXY_BOX_PORT_ADDRESS_CANDIDATES.size)
-        {
-            string address = BEEXY_BOX_PORT_ADDRESS_CANDIDATES[index];
-            if(file_exists(address))
-            {
-                control.button_box.open(address);
-                if(control.button_box.is_open)
-                {
-                    println("Managed to open button box on " + address);
-                    return OK;
-                }
-            }
-            index = index + 1;
-        }
-
-        return ERROR;
     }
 
     Part instructions
